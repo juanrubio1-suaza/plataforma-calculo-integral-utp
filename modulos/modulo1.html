@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1 - Sumas de Riemann</title>
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- KaTeX para renderizar fórmulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <!-- Plotly.js para gráficos interactivos -->
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Módulo 1: Sumas de Riemann</h1>
+        <a href="../index.html" style="color: white; text-decoration: underline;">← Volver al Menú Principal</a>
+    </header>
+
+    <main class="container">
+        <!-- Explicación Teórica -->
+        <section class="card-detalles">
+            <h2>Marco Teórico</h2>
+            <p>Las <strong>Sumas de Riemann</strong> permiten aproximar el área bajo una curva dividiendo el intervalo
+                $[a, b]$ en $n$ subintervalos de ancho $\Delta x = \frac{b-a}{n}$.</p>
+            <ul>
+                <li><strong>Izquierda:</strong> $L_n = \sum_{i=0}^{n-1} f(x_i) \Delta x$</li>
+                <li><strong>Derecha:</strong> $R_n = \sum_{i=1}^{n} f(x_i) \Delta x$</li>
+                <li><strong>Punto Medio:</strong> $M_n = \sum_{i=1}^{n} f(\overline{x}_i) \Delta x$</li>
+            </ul>
+        </section>
+
+        <!-- Visualizador Interactivo -->
+        <section class="card-detalles" style="margin-top: 1.5rem;">
+            <h2>Visualizador Interactivo ($f(x) = x^2$ en $[0, 2]$)</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                <label>Subintervalos ($n$):
+                    <input type="number" id="inputN" value="4" min="1" max="50" style="padding: 5px; width: 60px;">
+                </label>
+                <label>Tipo de Suma:
+                    <select id="selectTipo" style="padding: 5px;">
+                        <option value="izquierda">Izquierda (L_n)</option>
+                        <option value="derecha">Derecha (R_n)</option>
+                        <option value="medio">Punto Medio (M_n)</option>
+                    </select>
+                </label>
+                <button onclick="actualizarGraficoRiemann()"
+                    style="padding: 6px 15px; background-color: #004b87; color: white; border: none; border-radius: 4px; cursor: pointer;">Calcular
+                    / Graficar</button>
+            </div>
+
+            <div id="graficoRiemann" style="width: 100%; height: 400px;"></div>
+            <div id="resultadoCalc" style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem; color: #004b87;">
+            </div>
+        </section>
+
+        <!-- Ejemplos Resueltos -->
+        <section class="card-detalles" style="margin-top: 1.5rem;">
+            <h2>Ejemplo Resuelto</h2>
+            <p><strong>Calcular $L_4$ para $f(x) = x^2$ en el intervalo $[0, 2]$:</strong></p>
+            <p>1. Ancho de paso: $\Delta x = \frac{2 - 0}{4} = 0.5$</p>
+            <p>2. Puntos evaluados: $x = \{0, 0.5, 1.0, 1.5\}$</p>
+            <p>3. $L_4 = (0^2 + 0.5^2 + 1.0^2 + 1.5^2) \cdot 0.5 = (0 + 0.25 + 1.0 + 2.25) \cdot 0.5 = 1.75$</p>
+            <p><em>Valor exacto por integración: $\int_0^2 x^2 \, dx = \frac{8}{3} \approx 2.6667$</em></p>
+        </section>
+    </main>
+
+    <script src="../js/modulos.js"></script>
+    <script>
+        // Renderizar KaTeX al cargar
+        document.addEventListener("DOMContentLoaded", function () {
+            actualizarGraficoRiemann();
+        });
+    </script>
+    <script src="../js/modulos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Renderizar el gráfico de Plotly
+            actualizarGraficoRiemann();
+
+            // Renderizar las fórmulas con KaTeX
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+
+    <!-- Script auto-render de KaTeX -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+</body>
+
+</html>

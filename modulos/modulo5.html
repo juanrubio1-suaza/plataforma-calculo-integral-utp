@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 5 - Área bajo la Curva</title>
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- KaTeX para fórmulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Plotly.js para gráficos -->
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Módulo 5: Área bajo la Curva</h1>
+        <a href="../index.html" style="color: white; text-decoration: underline;">← Volver al Menú Principal</a>
+    </header>
+
+    <main class="container">
+        <!-- Marco Teórico -->
+        <section class="card-detalles">
+            <h2>Marco Teórico</h2>
+            <p>El <strong>Segundo Teorema Fundamental del Cálculo</strong> establece que si $f(x)$ es continua en el
+                intervalo $[a, b]$ y $F(x)$ es una antiderivada de $f(x)$, entonces el área exacta bajo la curva está
+                dada por:</p>
+            <p>$$\int_{a}^{b} f(x) \, dx = F(b) - F(a)$$</p>
+        </section>
+
+        <!-- Visualizador Interactivo -->
+        <section class="card-detalles" style="margin-top: 1.5rem;">
+            <h2>Visualizador del Área Exacta ($f(x) = x^2$)</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                <label>Límite inferior ($a$):
+                    <input type="number" id="inputA_area" value="0" step="0.5" style="padding: 5px; width: 60px;">
+                </label>
+                <label>Límite superior ($b$):
+                    <input type="number" id="inputB_area" value="2" step="0.5" style="padding: 5px; width: 60px;">
+                </label>
+                <button onclick="actualizarGraficoArea()"
+                    style="padding: 6px 15px; background-color: #004b87; color: white; border: none; border-radius: 4px; cursor: pointer;">Calcular
+                    Área</button>
+            </div>
+
+            <div id="graficoArea" style="width: 100%; height: 400px;"></div>
+            <div id="resultadoArea" style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem; color: #004b87;">
+            </div>
+        </section>
+
+        <!-- Ejemplo Resuelto -->
+        <section class="card-detalles" style="margin-top: 1.5rem;">
+            <h2>Ejemplo Resuelto</h2>
+            <p><strong>Calcular el área exacta para $f(x) = x^2$ en el intervalo $[0, 2]$:</strong></p>
+            <p>1. Encontrar la antiderivada: $F(x) = \int x^2 \, dx = \frac{x^3}{3}$</p>
+            <p>2. Evaluar en el límite superior: $F(2) = \frac{2^3}{3} = \frac{8}{3}$</p>
+            <p>3. Evaluar en el límite inferior: $F(0) = \frac{0^3}{3} = 0$</p>
+            <p>4. Aplicar la resta: $\int_0^2 x^2 \, dx = \frac{8}{3} - 0 = \frac{8}{3} \approx 2.6667$ u²</p>
+        </section>
+    </main>
+
+    <script src="../js/modulos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            actualizarGraficoArea();
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+
+</html>

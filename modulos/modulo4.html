@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4 - Regla de Simpson</title>
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- KaTeX para fórmulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Plotly.js para gráficos -->
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Módulo 4: Regla de Simpson 1/3</h1>
+        <a href="../index.html" style="color: white; text-decoration: underline;">← Volver al Menú Principal</a>
+    </header>
+
+    <main class="container">
+        <!-- Marco Teórico -->
+        <section class="card-detalles">
+            <h2>Marco Teórico</h2>
+            <p>La <strong>Regla de Simpson 1/3</strong> aproxima la integral ajustando polinomios de segundo grado
+                (parábolas) sobre pares de subintervalos. Requiere obligatoriamente que $n$ sea par.</p>
+            <p>Fórmula general para $n$ subintervalos pares ($\Delta x = \frac{b-a}{n}$):</p>
+            <p>$$S_n = \frac{\Delta x}{3} \left[ f(x_0) + 4f(x_1) + 2f(x_2) + 4f(x_3) + \dots + 4f(x_{n-1}) + f(x_n)
+                \right]$$</p>
+        </section>
+
+        <!-- Visualizador Interactivo -->
+        <section class="card-detalles" style="margin-top: 1.5rem;">
+            <h2>Visualizador Interactivo ($f(x) = x^2$ en $[0, 2]$)</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                <label>Subintervalos ($n$ par):
+                    <input type="number" id="inputN_simpson" value="4" min="2" max="50" step="2"
+                        style="padding: 5px; width: 60px;">
+                </label>
+                <button onclick="actualizarGraficoSimpson()"
+                    style="padding: 6px 15px; background-color: #004b87; color: white; border: none; border-radius: 4px; cursor: pointer;">Calcular
+                    / Graficar</button>
+            </div>
+
+            <div id="graficoSimpson" style="width: 100%; height: 400px;"></div>
+            <div id="resultadoSimpson" style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem; color: #004b87;">
+            </div>
+        </section>
+
+        <!-- Ejemplo Resuelto -->
+        <section class="card-detalles" style="margin-top: 1.5rem;">
+            <h2>Ejemplo Resuelto</h2>
+            <p><strong>Aproximar $\int_0^2 x^2 \, dx$ con $n = 4$:</strong></p>
+            <p>1. Ancho de paso: $\Delta x = \frac{2 - 0}{4} = 0.5$</p>
+            <p>2. Coeficientes intercalados: $[1, 4, 2, 4, 1]$</p>
+            <p>3. Evaluaciones: $f(0)=0, f(0.5)=0.25, f(1)=1, f(1.5)=2.25, f(2)=4$</p>
+            <p>4. $S_4 = \frac{0.5}{3} [1(0) + 4(0.25) + 2(1) + 4(2.25) + 1(4)] = \frac{0.5}{3} [0 + 1 + 2 + 9 + 4] =
+                \frac{0.5}{3} \times 16 = 2.6667$</p>
+        </section>
+    </main>
+
+    <script src="../js/modulos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            actualizarGraficoSimpson();
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+
+</html>

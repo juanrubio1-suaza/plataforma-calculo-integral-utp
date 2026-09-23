@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3 - Regla del Punto Medio</title>
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- KaTeX para fórmulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Plotly.js para gráficos -->
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Módulo 3: Regla del Punto Medio</h1>
+        <a href="../index.html" style="color: white; text-decoration: underline;">← Volver al Menú Principal</a>
+    </header>
+
+    <main class="container">
+        <!-- Marco Teórico -->
+        <section class="card-detalles">
+            <h2>Marco Teórico</h2>
+            <p>La <strong>Regla del Punto Medio</strong> aproxima el área bajo la curva construyendo rectángulos cuya
+                altura es el valor de la función en el punto medio de cada subintervalo.</p>
+            <p>Fórmula general para $n$ subintervalos de ancho $\Delta x = \frac{b-a}{n}$:</p>
+            <p>$$M_n = \Delta x \left[ f(\overline{x}_1) + f(\overline{x}_2) + \dots + f(\overline{x}_n) \right]$$</p>
+            <p>Donde $\overline{x}_i = \frac{x_{i-1} + x_i}{2}$.</p>
+        </section>
+
+        <!-- Visualizador Interactivo -->
+        <section class="card-detalles" style="margin-top: 1.5rem;">
+            <h2>Visualizador Interactivo ($f(x) = x^2$ en $[0, 2]$)</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                <label>Subintervalos ($n$):
+                    <input type="number" id="inputN_medio" value="4" min="1" max="50"
+                        style="padding: 5px; width: 60px;">
+                </label>
+                <button onclick="actualizarGraficoPuntoMedio()"
+                    style="padding: 6px 15px; background-color: #004b87; color: white; border: none; border-radius: 4px; cursor: pointer;">Calcular
+                    / Graficar</button>
+            </div>
+
+            <div id="graficoMedio" style="width: 100%; height: 400px;"></div>
+            <div id="resultadoMedio" style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem; color: #004b87;">
+            </div>
+        </section>
+
+        <!-- Ejemplo Resuelto -->
+        <section class="card-detalles" style="margin-top: 1.5rem;">
+            <h2>Ejemplo Resuelto</h2>
+            <p><strong>Aproximar $\int_0^2 x^2 \, dx$ con $n = 4$:</strong></p>
+            <p>1. Ancho de paso: $\Delta x = \frac{2 - 0}{4} = 0.5$</p>
+            <p>2. Puntos medios: $\overline{x}_1 = 0.25, \overline{x}_2 = 0.75, \overline{x}_3 = 1.25, \overline{x}_4 =
+                1.75$</p>
+            <p>3. Evaluaciones: $f(0.25)=0.0625, f(0.75)=0.5625, f(1.25)=1.5625, f(1.75)=3.0625$</p>
+            <p>4. $M_4 = 0.5 \times (0.0625 + 0.5625 + 1.5625 + 3.0625) = 0.5 \times 5.25 = 2.625$</p>
+        </section>
+    </main>
+
+    <script src="../js/modulos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            actualizarGraficoPuntoMedio();
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+
+</html>

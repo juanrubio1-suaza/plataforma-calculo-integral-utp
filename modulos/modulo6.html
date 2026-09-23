@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 6 - Integración Directa</title>
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- KaTeX para fórmulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Módulo 6: Integración Directa</h1>
+        <a href="../index.html" style="color: white; text-decoration: underline;">← Volver al Menú Principal</a>
+    </header>
+
+    <main class="container">
+        <!-- Marco Teórico y Tabla -->
+        <section class="card-detalles">
+            <h2>Marco Teórico y Fórmulas Inmediatas</h2>
+            <p>La <strong>integración directa</strong> utiliza las reglas antiderivadas fundamentales para resolver
+                integrales sin necesidad de transformaciones o sustituciones complejas.</p>
+
+            <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; text-align: left;">
+                <thead>
+                    <tr style="background-color: #004b87; color: white;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Regla</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Fórmula</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Constante</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">$\int k \, dx = kx + C$</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Potencia ($n \neq -1$)</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">$\int x^n \, dx = \frac{x^{n+1}}{n+1} + C$
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Exponencial</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">$\int e^x \, dx = e^x + C$</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Logarítmica</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">$\int \frac{1}{x} \, dx = \ln|x| + C$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Calculadora de Integrales de Potencias -->
+        <section class="card-detalles" style="margin-top: 1.5rem;">
+            <h2>Calculadora de Regla de la Potencia ($\int a \cdot x^n \, dx$)</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; align-items: center;">
+                <label>Coeficiente ($a$):
+                    <input type="number" id="inputA_directa" value="1" step="any" style="padding: 5px; width: 60px;">
+                </label>
+                <label>Exponente ($n$):
+                    <input type="number" id="inputN_directa" value="2" step="any" style="padding: 5px; width: 60px;">
+                </label>
+                <button onclick="calcularIntegralDirecta()"
+                    style="padding: 6px 15px; background-color: #004b87; color: white; border: none; border-radius: 4px; cursor: pointer;">Resolver
+                    Integral</button>
+            </div>
+
+            <div id="resultadoDirecta" style="margin-top: 1rem; font-weight: bold; font-size: 1.2rem; color: #004b87;">
+            </div>
+        </section>
+
+        <!-- Ejemplo Resuelto -->
+        <section class="card-detalles" style="margin-top: 1.5rem;">
+            <h2>Ejemplo Resuelto</h2>
+            <p><strong>Calcular $\int (3x^2 + 5x - 4) \, dx$:</strong></p>
+            <p>1. Aplicar la propiedad de linealidad: $3 \int x^2 \, dx + 5 \int x \, dx - 4 \int 1 \, dx$</p>
+            <p>2. Aplicar la regla de la potencia a cada término:</p>
+            <p>$$= 3\left(\frac{x^3}{3}\right) + 5\left(\frac{x^2}{2}\right) - 4(x) + C$$</p>
+            <p>3. Simplificar los coeficientes:</p>
+            <p>$$= x^3 + \frac{5}{2}x^2 - 4x + C$$</p>
+        </section>
+    </main>
+
+    <script src="../js/modulos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            calcularIntegralDirecta();
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+
+</html>
