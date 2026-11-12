@@ -68,3 +68,8 @@ header {
 .nota-modulo{background:#f8fafc;border-left:4px solid #94a3b8;padding:1rem;margin-top:1rem;line-height:1.6}
 .oculto{display:none!important}
 @media(max-width:600px){.controles-calculo{display:grid;grid-template-columns:1fr}.controles-calculo input,.controles-calculo select{width:100%;box-sizing:border-box}}
+
+/* Gráficas interactivas para los módulos 7 al 14 */
+.grafica-modulo{width:100%;min-height:360px;margin-top:1rem;border:1px solid #dbe4ee;border-radius:8px;background:#fff;}
+.texto-grafica{color:#475569;line-height:1.6;margin:.5rem 0 0;}
+@media(max-width:600px){.grafica-modulo{min-height:320px;}}
