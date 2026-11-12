@@ -50,13 +50,15 @@
       result = "∫ " + fmt(A) + " " + names[type] + "(" + fmt(k) + "x) dx = " + formulas[type];
       result += "<p><strong>Idea:</strong> se aplica la antiderivada trigonométrica y se compensa el coeficiente interno k.</p>";
     } else if (module === 11) {
-      const a=Math.abs(p1)||1;
+      const a=p1;
+      if (!(a>0)) return error("El parámetro a debe ser un número positivo mayor que cero.");
       if (type==="asin") result="∫ dx/√(" + fmt(a*a) + " − x²) = arcsin(x/" + fmt(a) + ") + C";
       else if (type==="atan") result="∫ dx/(" + fmt(a*a) + " + x²) = (1/" + fmt(a) + ") arctan(x/" + fmt(a) + ") + C";
       else result="∫ dx/[x√(x² − " + fmt(a*a) + ")] = (1/" + fmt(a) + ") arcsec(|x|/" + fmt(a) + ") + C";
       result += "<p><strong>Reconocimiento:</strong> compara el integrando con las formas estándar de las derivadas de arcsin, arctan o arcsec.</p>";
     } else if (module === 12) {
-      const a=Math.abs(p1)||1;
+      const a=p1;
+      if (!(a>0)) return error("El parámetro a debe ser un número positivo mayor que cero.");
       if (type==="asinh") result="∫ dx/√(x² + " + fmt(a*a) + ") = asinh(x/" + fmt(a) + ") + C";
       else if (type==="acosh") result="∫ dx/√(x² − " + fmt(a*a) + ") = acosh(x/" + fmt(a) + ") + C  (x > " + fmt(a) + ")";
       else result="∫ dx/(" + fmt(a*a) + " − x²) = (1/" + fmt(2*a) + ") ln|( " + fmt(a) + " + x)/( " + fmt(a) + " − x)| + C";
