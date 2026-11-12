@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 8 - Integrales Exponenciales</title><link rel="stylesheet" href="../css/styles.css"></head>
+<body data-module="8">
+<header><h1>Módulo 8: Integrales Exponenciales</h1><a href="../index.html" style="color:white;text-decoration:underline">← Volver al Menú Principal</a></header>
+<main class="container">
+<section class="card-detalles"><h2>Marco teórico</h2><p>Las funciones exponenciales conservan su forma al derivarse. Por eso, al integrar e^(kx) o a^x, se divide por la constante que acompaña a x o por ln(a), respectivamente.</p><p><strong>Fórmula principal:</strong> ∫ e^(kx) dx = e^(kx)/k + C</p><div class="nota-modulo">Selecciona la forma exponencial y ajusta sus parámetros.</div></section>
+<section class="card-detalles" style="margin-top:1.5rem"><h2>Calculadora interactiva</h2><p>Selecciona el tipo de integral e ingresa los valores para obtener una antiderivada.</p>
+<div class="controles-calculo"><label>Tipo de integral<select id="tipoIntegral"><option value="exp" selected>Exponencial e^(kx)</option><option value="base" >Exponencial a^x</option></select></label><label>Coeficiente (a)<input type="number" id="param1" value="1" step="any"></label><label>Constante del exponente / base<input type="number" id="param2" value="1" step="any"></label><button class="boton-calcular" id="btnResolver" type="button">Resolver integral</button></div>
+<div id="resultadoAvanzado" aria-live="polite"></div></section>
+<section class="card-detalles" style="margin-top:1.5rem"><h2>Recomendación de estudio</h2><p>Antes de aplicar la fórmula, identifica la estructura del integrando y verifica las restricciones de dominio. Después, deriva el resultado para comprobar que recuperas la función original.</p></section>
+</main><script src="../js/modulos-avanzados.js"></script></body></html>
