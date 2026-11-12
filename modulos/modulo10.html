@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 10 - Integrales Trigonométricas</title><link rel="stylesheet" href="../css/styles.css"></head>
+<body data-module="10">
+<header><h1>Módulo 10: Integrales Trigonométricas</h1><a href="../index.html" style="color:white;text-decoration:underline">← Volver al Menú Principal</a></header>
+<main class="container">
+<section class="card-detalles"><h2>Marco teórico</h2><p>Estas integrales se resuelven reconociendo las antiderivadas trigonométricas fundamentales. Si el argumento es kx, se divide por k debido a la regla de la cadena.</p><p><strong>Fórmula principal:</strong> ∫ sin(kx) dx = −cos(kx)/k + C</p><div class="nota-modulo">Incluye seno, coseno, secante, cosecante y sus formas derivadas.</div></section>
+<section class="card-detalles" style="margin-top:1.5rem"><h2>Calculadora interactiva</h2><p>Selecciona el tipo de integral e ingresa los valores para obtener una antiderivada.</p>
+<div class="controles-calculo"><label>Tipo de integral<select id="tipoIntegral"><option value="sin" selected>Seno</option><option value="cos" >Coseno</option><option value="sec2" >Secante al cuadrado</option><option value="csc2" >Cosecante al cuadrado</option><option value="sectan" >Secante por tangente</option><option value="csccot" >Cosecante por cotangente</option></select></label><label>Coeficiente exterior (a)<input type="number" id="param1" value="1" step="any"></label><label>Coeficiente del argumento (k)<input type="number" id="param2" value="1" step="any"></label><button class="boton-calcular" id="btnResolver" type="button">Resolver integral</button></div>
+<div id="resultadoAvanzado" aria-live="polite"></div></section>
+<section class="card-detalles" style="margin-top:1.5rem"><h2>Recomendación de estudio</h2><p>Antes de aplicar la fórmula, identifica la estructura del integrando y verifica las restricciones de dominio. Después, deriva el resultado para comprobar que recuperas la función original.</p></section>
+</main><script src="../js/modulos-avanzados.js"></script></body></html>
