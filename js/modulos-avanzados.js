@@ -32,7 +32,7 @@
       result += "<p><strong>Idea:</strong> la derivada de la función exponencial es proporcional a ella misma.</p>";
     } else if (module === 9) {
       const k=p1;
-      if (k<=0 || k===1) return error("La base del logaritmo debe ser positiva y diferente de 1.");
+      if (type==="base" && (k<=0 || k===1)) return error("La base del logaritmo debe ser positiva y diferente de 1.");
       result = type==="ln" ? "∫ ln(x) dx = x ln(x) − x + C,  (x > 0)" : "∫ log_" + fmt(k) + "(x) dx = [x ln(x) − x]/ln(" + fmt(k) + ") + C";
       result += "<p><strong>Por partes:</strong> u = ln(x), dv = dx; entonces du = dx/x y v = x.</p>";
     } else if (module === 10) {
