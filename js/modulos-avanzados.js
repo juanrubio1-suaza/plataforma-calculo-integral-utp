@@ -15,7 +15,7 @@
     const p1 = num("param1", 1), p2 = num("param2", 1), p3 = num("param3", 0);
     let result = "";
     if (module === 7) {
-      const [A,k,c,n] = [p1,p2,p3,num("param4",2)];
+      const A=p1, k=p2, c=p3, n=type==="log" ? -1 : num("param4",2);
       if (k === 0) return error("El coeficiente de x dentro del paréntesis no puede ser cero.");
       if (n === -1) result = "∫ " + fmt(A) + "/(" + fmt(k) + "x + " + fmt(c) + ") dx = (" + fmt(A/k) + ") ln|" + fmt(k) + "x + " + fmt(c) + "| + C";
       else result = "∫ " + fmt(A) + "(" + fmt(k) + "x + " + fmt(c) + ")^" + fmt(n) + " dx = (" + fmt(A/(k*(n+1))) + ")(" + fmt(k) + "x + " + fmt(c) + ")^" + fmt(n+1) + " + C";
