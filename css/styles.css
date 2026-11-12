@@ -56,3 +56,15 @@ header {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
+/* Mejoras visuales para los módulos avanzados */
+.controles-calculo{display:flex;gap:1rem;flex-wrap:wrap;align-items:end;margin:1rem 0}
+.controles-calculo label{display:flex;flex-direction:column;gap:.35rem;font-weight:600;color:#334155}
+.controles-calculo input,.controles-calculo select{padding:.65rem;border:1px solid #cbd5e1;border-radius:6px;min-width:110px;font:inherit}
+.boton-calcular{padding:.7rem 1.2rem;background:#004b87;color:#fff;border:0;border-radius:6px;font-weight:700;cursor:pointer}
+.boton-calcular:hover{background:#00365f}
+.resultado-formula{margin-top:1rem;padding:1rem;border-left:5px solid #004b87;background:#eef6fc;border-radius:6px;overflow-wrap:anywhere}
+.resultado-formula p{line-height:1.7}
+.error-calculo{color:#b42318;font-weight:700}
+.nota-modulo{background:#f8fafc;border-left:4px solid #94a3b8;padding:1rem;margin-top:1rem;line-height:1.6}
+.oculto{display:none!important}
+@media(max-width:600px){.controles-calculo{display:grid;grid-template-columns:1fr}.controles-calculo input,.controles-calculo select{width:100%;box-sizing:border-box}}
