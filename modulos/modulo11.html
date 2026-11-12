@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 11 - Integrales Trigonométricas Inversas</title><link rel="stylesheet" href="../css/styles.css"></head>
+<body data-module="11">
+<header><h1>Módulo 11: Integrales Trigonométricas Inversas</h1><a href="../index.html" style="color:white;text-decoration:underline">← Volver al Menú Principal</a></header>
+<main class="container">
+<section class="card-detalles"><h2>Marco teórico</h2><p>Algunas integrales tienen la forma de las derivadas de arcsin, arctan y arcsec. Reconocer el patrón permite escribir la antiderivada directamente.</p><p><strong>Fórmula principal:</strong> ∫ dx/√(a² − x²) = arcsin(x/a) + C</p><div class="nota-modulo">El parámetro a se toma positivo.</div></section>
+<section class="card-detalles" style="margin-top:1.5rem"><h2>Calculadora interactiva</h2><p>Selecciona el tipo de integral e ingresa los valores para obtener una antiderivada.</p>
+<div class="controles-calculo"><label>Tipo de integral<select id="tipoIntegral"><option value="asin" selected>Arcoseno</option><option value="atan" >Arcotangente</option><option value="arcsec" >Arcosecante</option></select></label><label>Parámetro positivo (a)<input type="number" id="param1" value="1" step="any"></label><button class="boton-calcular" id="btnResolver" type="button">Resolver integral</button></div>
+<div id="resultadoAvanzado" aria-live="polite"></div></section>
+<section class="card-detalles" style="margin-top:1.5rem"><h2>Visualización gráfica</h2><p class="texto-grafica">Explora la curva del integrando. Puedes acercar, alejar y mover la gráfica. El área sombreada representa una región ilustrativa entre x = −2 y x = 2 (ajustada al dominio).</p><div id="graficaModulo" class="grafica-modulo" role="img" aria-label="Gráfica interactiva de la función que se está integrando"></div></section>
+<section class="card-detalles" style="margin-top:1.5rem"><h2>Recomendación de estudio</h2><p>Antes de aplicar la fórmula, identifica la estructura del integrando y verifica las restricciones de dominio. Después, deriva el resultado para comprobar que recuperas la función original.</p></section>
+</main><script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script><script src="../js/modulos-avanzados.js"></script></body></html>
