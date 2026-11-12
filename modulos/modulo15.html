@@ -207,7 +207,7 @@
     const shape=$("crossShape").value;
     const area=x=>shape==="square"?x:shape==="semicircle"?pi*x/8:Math.sqrt(3)*x/4;
     const volume=simpson(area,0,4);
-    const exact=shape==="square"?8:shape==="semicircle"?pi/2:2*Math.sqrt(3);
+    const exact=shape==="square"?8:shape==="semicircle"?pi:2*Math.sqrt(3);
     const label={square:"cuadrado",semicircle:"semicírculo",triangle:"triángulo equilátero"}[shape];
     $("crossResult").innerHTML="<strong>Sección:</strong> "+label+". <strong>Anchura:</strong> s(x)=√x.<br><strong>Área:</strong> A(x)="+(shape==="square"?"x":shape==="semicircle"?"πx/8":"(√3/4)x")+".<br><strong>Integral:</strong> V=∫₀⁴ A(x) dx.<br><strong>Volumen:</strong> "+fmt(volume)+" unidades cúbicas (valor exacto: "+fmt(exact)+").";
     plot("crossGraph",crossMesh(shape),"Sólido con secciones transversales: "+label);
