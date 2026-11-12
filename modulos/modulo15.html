@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 15 - Sólidos de Revolución</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    .sr-intro{line-height:1.7}
+    .sr-topic{margin-top:1.5rem}
+    .sr-topic h2{color:#004b87}
+    .sr-controls{display:flex;gap:1rem;align-items:end;flex-wrap:wrap;margin:1rem 0}
+    .sr-controls label{display:flex;flex-direction:column;gap:.35rem;font-weight:600;color:#334155}
+    .sr-controls select,.sr-controls input{padding:.65rem;border:1px solid #cbd5e1;border-radius:6px;font:inherit;min-width:150px}
+    .sr-btn{padding:.7rem 1.2rem;background:#004b87;color:#fff;border:0;border-radius:6px;font-weight:700;cursor:pointer}
+    .sr-btn:hover{background:#00365f}
+    .sr-result{margin-top:1rem;padding:1rem;border-left:5px solid #004b87;background:#eef6fc;border-radius:6px;line-height:1.7}
+    .sr-graph{width:100%;height:440px;border:1px solid #dbe4ee;border-radius:8px;margin-top:1rem}
+    .sr-note{background:#f8fafc;border-left:4px solid #94a3b8;padding:1rem;margin-top:1rem;line-height:1.7}
+    .sr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+    .sr-match{background:#f8fafc;border:1px solid #dbe4ee;border-radius:8px;padding:1rem}
+    .sr-match label{display:flex;flex-direction:column;gap:.4rem;font-weight:600}
+    .sr-match select{padding:.6rem;border:1px solid #cbd5e1;border-radius:6px;font:inherit}
+    @media(max-width:600px){.sr-graph{height:340px}.sr-controls{display:grid;grid-template-columns:1fr}.sr-controls select,.sr-controls input{width:100%;box-sizing:border-box}}
+  </style>
+</head>
+<body>
+<header>
+  <h1>Módulo 15: Sólidos de Revolución</h1>
+  <p>Visualización, interpretación y cálculo de volúmenes</p>
+  <a href="../index.html" style="color:white;text-decoration:underline">← Volver al Menú Principal</a>
+</header>
+<main class="container">
+  <section class="card-detalles sr-intro">
+    <h2>¿Qué es un sólido de revolución?</h2>
+    <p>Es un cuerpo tridimensional que se obtiene al girar una región plana alrededor de una recta llamada <strong>eje de revolución</strong>. La integral permite sumar las áreas de sus secciones para calcular el volumen.</p>
+    <p>En esta sección se trabajan los cinco tópicos de los talleres: secciones transversales conocidas, asociación de figuras 2D con sólidos, discos alrededor de una línea horizontal, arandelas alrededor de una línea horizontal y sólidos alrededor de una línea vertical.</p>
+    <div class="sr-note"><strong>Cómo explorar:</strong> cambia los controles, pulsa el botón de cálculo y usa el mouse sobre las gráficas 3D para girar, acercar y observar el sólido desde diferentes ángulos. Los ejemplos son modelos didácticos; cada resultado muestra las dimensiones y la integral utilizada.</div>
+  </section>
+
+  <section class="card-detalles sr-topic">
+    <h2>1. Volumen con sección transversal conocida (eje X)</h2>
+    <p>Cuando se conoce el área de cada sección perpendicular al eje X, el volumen se obtiene integrando esa área: <strong>V = ∫ₐᵇ A(x) dx</strong>.</p>
+    <p>Usaremos como región base la anchura s(x) = √x en el intervalo [0, 4]. Puedes cambiar la forma de las secciones transversales.</p>
+    <div class="sr-controls">
+      <label>Forma de la sección
+        <select id="crossShape">
+          <option value="square">Cuadrado</option>
+          <option value="semicircle">Semicírculo (diámetro = √x)</option>
+          <option value="triangle">Triángulo equilátero</option>
+        </select>
+      </label>
+      <button class="sr-btn" id="crossRun">Calcular volumen y visualizar</button>
+    </div>
+    <div id="crossResult" class="sr-result" aria-live="polite"></div>
+    <div id="crossGraph" class="sr-graph" role="img" aria-label="Modelo tridimensional de un sólido con secciones transversales"></div>
+  </section>
+
+  <section class="card-detalles sr-topic">
+    <h2>2. Coincidencia de figuras 2D / Sólido de revolución</h2>
+    <p>Relaciona cada figura plana con el sólido que se forma al girarla alrededor del eje indicado. Después comprueba tus respuestas y observa un modelo tridimensional.</p>
+    <div class="sr-grid">
+      <div class="sr-match"><strong>Rectángulo girando alrededor de uno de sus lados</strong>
+        <label>¿Qué sólido se forma?
+          <select id="matchRect"><option value="">Selecciona...</option><option value="cylinder">Cilindro</option><option value="cone">Cono</option><option value="sphere">Esfera</option></select>
+        </label>
+      </div>
+      <div class="sr-match"><strong>Triángulo rectángulo girando alrededor de un cateto</strong>
+        <label>¿Qué sólido se forma?
+          <select id="matchTriangle"><option value="">Selecciona...</option><option value="cylinder">Cilindro</option><option value="cone">Cono</option><option value="sphere">Esfera</option></select>
+        </label>
+      </div>
+      <div class="sr-match"><strong>Semicírculo girando alrededor de su diámetro</strong>
+        <label>¿Qué sólido se forma?
+          <select id="matchSemi"><option value="">Selecciona...</option><option value="cylinder">Cilindro</option><option value="cone">Cono</option><option value="sphere">Esfera</option></select>
+        </label>
+      </div>
+    </div>
+    <div class="sr-controls"><button class="sr-btn" id="matchCheck">Comprobar coincidencias</button></div>
+    <div id="matchResult" class="sr-result" aria-live="polite">Selecciona una respuesta en cada caso.</div>
+    <div id="matchGraph" class="sr-graph" role="img" aria-label="Sólido tridimensional asociado a la figura seleccionada"></div>
+    <div class="sr-controls">
+      <label>Explorar un sólido
+        <select id="matchSolid"><option value="cylinder">Cilindro</option><option value="cone">Cono</option><option value="sphere">Esfera</option></select>
+      </label>
+      <button class="sr-btn" id="matchShow">Mostrar sólido</button>
+    </div>
+  </section>
+
+  <section class="card-detalles sr-topic">
+    <h2>3. Sólido alrededor de una línea horizontal (método de discos)</h2>
+    <p>Al girar la región bajo y = √x, desde x = 0 hasta x = 4, alrededor del eje horizontal y = 0, se forman discos sin agujero.</p>
+    <p><strong>Fórmula:</strong> V = π ∫₀⁴ [R(x)]² dx.</p>
+    <div class="sr-controls">
+      <label>Límite inferior (a)<input id="diskA" type="number" value="0" min="0" max="4" step="0.5"></label>
+      <label>Límite superior (b)<input id="diskB" type="number" value="4" min="0.1" max="4" step="0.5"></label>
+      <button class="sr-btn" id="diskRun">Calcular y girar</button>
+    </div>
+    <div id="diskResult" class="sr-result" aria-live="polite"></div>
+    <div id="diskGraph" class="sr-graph" role="img" aria-label="Sólido de revolución por el método de discos"></div>
+  </section>
+
+  <section class="card-detalles sr-topic">
+    <h2>4. Sólido sobre una línea horizontal (método de arandelas)</h2>
+    <p>Cuando la región no llega hasta el eje de giro, aparece un hueco interior. Se resta el área del disco pequeño a la del disco grande.</p>
+    <p><strong>Fórmula:</strong> V = π ∫ₐᵇ [R(x)² − r(x)²] dx.</p>
+    <p>Ejemplo: girar la región comprendida entre y = 2 y y = 1, para 0 ≤ x ≤ 3, alrededor del eje horizontal y = 0.</p>
+    <div class="sr-controls">
+      <label>Radio exterior R<input id="washerR" type="number" value="2" min="0.1" step="0.1"></label>
+      <label>Radio interior r<input id="washerr" type="number" value="1" min="0" step="0.1"></label>
+      <label>Longitud del intervalo<input id="washerL" type="number" value="3" min="0.1" step="0.1"></label>
+      <button class="sr-btn" id="washerRun">Calcular y visualizar</button>
+    </div>
+    <div id="washerResult" class="sr-result" aria-live="polite"></div>
+    <div id="washerGraph" class="sr-graph" role="img" aria-label="Sólido de revolución por el método de arandelas"></div>
+  </section>
+
+  <section class="card-detalles sr-topic">
+    <h2>5. Sólido sobre una línea vertical</h2>
+    <p>Al girar una región alrededor de un eje vertical, conviene describir los radios en función de y e integrar respecto a esa variable.</p>
+    <p>Ejemplo: la región entre x = 0 y x = √y, para 0 ≤ y ≤ 4, gira alrededor del eje vertical x = 0. Se forman discos horizontales.</p>
+    <p><strong>Fórmula:</strong> V = π ∫₀⁴ [R(y)]² dy.</p>
+    <div class="sr-controls">
+      <label>Límite inferior (c)<input id="verticalA" type="number" value="0" min="0" max="4" step="0.5"></label>
+      <label>Límite superior (d)<input id="verticalB" type="number" value="4" min="0.1" max="4" step="0.5"></label>
+      <button class="sr-btn" id="verticalRun">Calcular y girar</button>
+    </div>
+    <div id="verticalResult" class="sr-result" aria-live="polite"></div>
+    <div id="verticalGraph" class="sr-graph" role="img" aria-label="Sólido de revolución alrededor de un eje vertical"></div>
+  </section>
+</main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const pi = Math.PI;
+  const fmt = n => Number(n.toFixed(5)).toString();
+  const layout3d = title => ({
+    title, paper_bgcolor:"#fff", plot_bgcolor:"#fff",
+    scene:{xaxis:{title:"x"},yaxis:{title:"y"},zaxis:{title:"z"},aspectmode:"data"},
+    margin:{l:0,r:0,t:45,b:0},showlegend:false
+  });
+  const plot = (id,traces,title) => {
+    if(typeof Plotly==="undefined"){ $(id).textContent="No se pudo cargar la biblioteca de visualización 3D. Comprueba tu conexión e inténtalo de nuevo."; return; }
+    Plotly.react(id,traces,layout3d(title),{responsive:true,displaylogo:false});
+  };
+  const surfaceX = (radius,x0,x1,innerRadius=null) => {
+    const X=[],Y=[],Z=[],Xi=[],Yi=[],Zi=[];
+    const nx=45, nt=48;
+    for(let i=0;i<nx;i++){
+      const x=x0+(x1-x0)*i/(nx-1), ro=radius(x);
+      const rowX=[],rowY=[],rowZ=[],rowYi=[],rowZi=[];
+      for(let j=0;j<nt;j++){
+        const t=2*pi*j/(nt-1);
+        rowX.push(x); rowY.push(ro*Math.cos(t)); rowZ.push(ro*Math.sin(t));
+        if(innerRadius!==null){const ri=innerRadius(x);rowYi.push(ri*Math.cos(t));rowZi.push(ri*Math.sin(t));}
+      }
+      X.push(rowX);Y.push(rowY);Z.push(rowZ);
+      if(innerRadius!==null){Xi.push(rowX);Yi.push(rowYi);Zi.push(rowZi);}
+    }
+    const traces=[{type:"surface",x:X,y:Y,z:Z,colorscale:[[0,"#79b8e3"],[1,"#004b87"]],opacity:.92,showscale:false,name:"Superficie exterior"}];
+    if(innerRadius!==null) traces.push({type:"surface",x:Xi,y:Yi,z:Zi,colorscale:[[0,"#f4c77a"],[1,"#d97706"]],opacity:.95,showscale:false,name:"Superficie interior"});
+    return traces;
+  };
+  const surfaceY = (radius,y0,y1) => {
+    const X=[],Y=[],Z=[],ny=45,nt=48;
+    for(let i=0;i<ny;i++){
+      const y=y0+(y1-y0)*i/(ny-1),r=radius(y),rx=[],ry=[],rz=[];
+      for(let j=0;j<nt;j++){const t=2*pi*j/(nt-1);rx.push(r*Math.cos(t));ry.push(y);rz.push(r*Math.sin(t));}
+      X.push(rx);Y.push(ry);Z.push(rz);
+    }
+    return [{type:"surface",x:X,y:Y,z:Z,colorscale:[[0,"#79b8e3"],[1,"#004b87"]],opacity:.92,showscale:false}];
+  };
+  const simpson = (fn,a,b,n=400) => {
+    if(a===b)return 0;if(n%2)n++;
+    const h=(b-a)/n;let sum=fn(a)+fn(b);
+    for(let i=1;i<n;i++)sum+=(i%2?4:2)*fn(a+i*h);
+    return sum*h/3;
+  };
+  const crossPolygon = (shape,w) => {
+    const pts=[];
+    if(shape==="square"){
+      const corners=[[-w/2,-w/2],[w/2,-w/2],[w/2,w/2],[-w/2,w/2]];
+      for(let e=0;e<4;e++)for(let k=0;k<10;k++){const t=k/10,a=corners[e],b=corners[(e+1)%4];pts.push([a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t]);}
+    } else if(shape==="triangle"){
+      const h=Math.sqrt(3)*w/2,c=[[-w/2,0],[w/2,0],[0,h]];
+      for(let e=0;e<3;e++)for(let k=0;k<14;k++){const t=k/14,a=c[e],b=c[(e+1)%3];pts.push([a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t]);}
+    } else {
+      for(let k=0;k<28;k++){const t=pi*k/27;pts.push([w/2*Math.cos(t),w/2*Math.sin(t)]);}
+      for(let k=0;k<12;k++){const t=k/12;pts.push([w/2*(1-2*t),0]);}
+    }
+    return pts;
+  };
+  const crossMesh = shape => {
+    const xs=32, vertices=[],ii=[],jj=[],kk=[],rings=40;
+    for(let i=0;i<xs;i++){
+      const x=4*i/(xs-1),w=Math.sqrt(Math.max(0,x)),poly=crossPolygon(shape,w);
+      for(const p of poly)vertices.push([x,p[0],p[1]]);
+    }
+    for(let i=0;i<xs-1;i++)for(let j=0;j<rings;j++){
+      const a=i*rings+j,b=i*rings+(j+1)%rings,c=(i+1)*rings+(j+1)%rings,d=(i+1)*rings+j;
+      ii.push(a,a);jj.push(b,c);kk.push(d,d);ii.push(b);jj.push(c);kk.push(d);
+    }
+    return [{type:"mesh3d",x:vertices.map(v=>v[0]),y:vertices.map(v=>v[1]),z:vertices.map(v=>v[2]),i:ii,j:jj,k:kk,color:"#2878b8",opacity:.86,flatshading:true,showscale:false}];
+  };
+  function runCross(){
+    const shape=$("crossShape").value;
+    const area=x=>shape==="square"?x:shape==="semicircle"?pi*x/8:Math.sqrt(3)*x/4;
+    const volume=simpson(area,0,4);
+    const exact=shape==="square"?8:shape==="semicircle"?pi/2:2*Math.sqrt(3);
+    const label={square:"cuadrado",semicircle:"semicírculo",triangle:"triángulo equilátero"}[shape];
+    $("crossResult").innerHTML="<strong>Sección:</strong> "+label+". <strong>Anchura:</strong> s(x)=√x.<br><strong>Área:</strong> A(x)="+(shape==="square"?"x":shape==="semicircle"?"πx/8":"(√3/4)x")+".<br><strong>Integral:</strong> V=∫₀⁴ A(x) dx.<br><strong>Volumen:</strong> "+fmt(volume)+" unidades cúbicas (valor exacto: "+fmt(exact)+").";
+    plot("crossGraph",crossMesh(shape),"Sólido con secciones transversales: "+label);
+  }
+  const solidTraces = (kind) => {
+    const nx=45,nt=48,X=[],Y=[],Z=[];
+    for(let i=0;i<nx;i++){
+      const u=-1+2*i/(nx-1),rx=[],ry=[],rz=[];
+      for(let j=0;j<nt;j++){
+        const t=2*pi*j/(nt-1);
+        let x,y,z;
+        if(kind==="cylinder"){x=2*(u+1)/2;y=Math.cos(t);z=Math.sin(t);}
+        else if(kind==="cone"){x=2*(u+1)/2;y=(1-u)/2*Math.cos(t);z=(1-u)/2*Math.sin(t);}
+        else {x=u;y=Math.sqrt(Math.max(0,1-u*u))*Math.cos(t);z=Math.sqrt(Math.max(0,1-u*u))*Math.sin(t);}
+        rx.push(x);ry.push(y);rz.push(z);
+      }X.push(rx);Y.push(ry);Z.push(rz);
+    }
+    return [{type:"surface",x:X,y:Y,z:Z,colorscale:[[0,"#8ecae6"],[1,"#004b87"]],showscale:false,opacity:.93}];
+  };
+  function checkMatches(){
+    const answers=[$("matchRect").value,$("matchTriangle").value,$("matchSemi").value],correct=["cylinder","cone","sphere"];
+    const labels=["rectángulo → cilindro","triángulo rectángulo → cono","semicírculo → esfera"];
+    let score=0;answers.forEach((v,i)=>{if(v===correct[i])score++;});
+    $("matchResult").innerHTML="<strong>Resultado: "+score+"/3 correctas.</strong><br>"+labels.map((t,i)=>t+": "+(answers[i]===correct[i]?"Correcto":"Revisa esta relación")).join("<br>");
+    const selected=answers.find(v=>v)||"cylinder";
+    $("matchSolid").value=selected;
+    plot("matchGraph",solidTraces(selected),"Modelo 3D: "+selected);
+  }
+  function showMatchSolid(){const k=$("matchSolid").value;plot("matchGraph",solidTraces(k),"Modelo 3D: "+({cylinder:"cilindro",cone:"cono",sphere:"esfera"}[k]));}
+  function runDisk(){
+    const a=Number($("diskA").value),b=Number($("diskB").value);
+    if(!Number.isFinite(a)||!Number.isFinite(b)||a<0||b>4||b<=a){$("diskResult").textContent="Usa límites válidos: 0 ≤ a < b ≤ 4.";return;}
+    const v=simpson(x=>pi*x,a,b),exact=pi*(b*b-a*a)/2;
+    $("diskResult").innerHTML="<strong>Radio:</strong> R(x)=√x.<br><strong>Integral:</strong> V=π∫ₐᵇ(√x)² dx = π∫ₐᵇ x dx.<br><strong>Volumen:</strong> "+fmt(v)+" u³ (exacto: "+fmt(exact)+" u³).";
+    plot("diskGraph",surfaceX(x=>Math.sqrt(x),a,b),"Discos alrededor del eje horizontal y = 0");
+  }
+  function runWasher(){
+    const R=Number($("washerR").value),r=Number($("washerr").value),L=Number($("washerL").value);
+    if(!(R>r&&r>=0&&L>0)){ $("washerResult").textContent="Condiciones necesarias: R debe ser mayor que r, r ≥ 0 y la longitud debe ser positiva.";return;}
+    const v=pi*(R*R-r*r)*L;
+    $("washerResult").innerHTML="<strong>Radio exterior:</strong> R="+fmt(R)+". <strong>Radio interior:</strong> r="+fmt(r)+".<br><strong>Integral:</strong> V=π∫₀ᴸ(R²−r²) dx = π("+fmt(R*R)+"−"+fmt(r*r)+")·"+fmt(L)+".<br><strong>Volumen:</strong> "+fmt(v)+" u³.";
+    plot("washerGraph",surfaceX(()=>R,0,L,()=>r),"Arandela: radio exterior "+fmt(R)+" e interior "+fmt(r));
+  }
+  function runVertical(){
+    const a=Number($("verticalA").value),b=Number($("verticalB").value);
+    if(!Number.isFinite(a)||!Number.isFinite(b)||a<0||b>4||b<=a){$("verticalResult").textContent="Usa límites válidos: 0 ≤ c < d ≤ 4.";return;}
+    const v=simpson(y=>pi*y,a,b),exact=pi*(b*b-a*a)/2;
+    $("verticalResult").innerHTML="<strong>Eje:</strong> vertical, x=0. <strong>Radio:</strong> R(y)=√y.<br><strong>Integral:</strong> V=π∫cᵈ(√y)² dy = π∫cᵈ y dy.<br><strong>Volumen:</strong> "+fmt(v)+" u³ (exacto: "+fmt(exact)+" u³).";
+    plot("verticalGraph",surfaceY(y=>Math.sqrt(y),a,b),"Discos horizontales alrededor del eje vertical x = 0");
+  }
+  $("crossRun").addEventListener("click",runCross);
+  $("crossShape").addEventListener("change",runCross);
+  $("matchCheck").addEventListener("click",checkMatches);
+  $("matchShow").addEventListener("click",showMatchSolid);
+  $("matchSolid").addEventListener("change",showMatchSolid);
+  $("diskRun").addEventListener("click",runDisk);
+  $("washerRun").addEventListener("click",runWasher);
+  $("verticalRun").addEventListener("click",runVertical);
+  document.addEventListener("DOMContentLoaded",()=>{runCross();showMatchSolid();runDisk();runWasher();runVertical();});
+})();
+</script>
+</body>
+</html>
